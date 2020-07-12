@@ -10,6 +10,15 @@ This is the [Neotron](https://github.com/neotron-compute) BIOS for the [Neotron-
 
 ![Format Status](https://github.com/neotron-compute/neotron-600-bios/workflows/Format/badge.svg "Github Action Format Check Status")
 
+## Building
+
+```console
+$ cargo build --release
+$ cargo objcopy --release -- -O ihex neotron-600-bios.hex
+```
+
+Now flash the `neotron-600-bios.hex` file with your favourite Teensy flash tool.
+
 ## Compatibility
 
 This BIOS will run on the Teensy 4.1, but assumes you have a Neotron-600 baseboard fitted. Other Teensy 4.1 based systems can easily be supported.
@@ -42,6 +51,10 @@ The Neotron 600 board adds:
 * Parallel Printer Port
 * RS-232 Port
 * Power and Reset switch
+
+## Memory Layout
+
+TBD. We will allocate some of the Teensy 4.1 NOR flash chip to the BIOS, and some to the OS. We also need to decide how we divide up the 1024 KiB of internal RAM (lets call it 'internal RAM'), and how we detect whether a QuadSPI RAM has been fitted to the expansion port on the Teensy (lets call it 'external RAM'). We need some RAM set aside for a VGA frame buffer, some for OS things and stack, some for the USB driver, etc.
 
 ## Changelog
 
